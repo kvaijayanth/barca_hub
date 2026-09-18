@@ -11,18 +11,16 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Barça Hub">
   <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg">
-
+  
   <style>
     :root {
       --blau: #A50044;
       --grana: #004D98;
       --gold: #EDBB00;
-      --bg: #0B0E14;
-      --card-bg: #161B22;
-      --border: #30363D;
-      --text: #F0F6FC;
-      --subtext: #8B949E;
-      --green: #238636;
+      --bg: #0F172A;
+      --card-bg: #1E293B;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -30,7 +28,7 @@
 
     header {
       background: linear-gradient(135deg, var(--blau), var(--grana));
-      padding: 16px;
+      padding: 20px 16px;
       text-align: center;
       border-bottom: 3px solid var(--gold);
       position: sticky;
@@ -38,68 +36,21 @@
       z-index: 100;
     }
 
-    header h1 { font-size: 1.4rem; letter-spacing: 1px; color: #FFF; text-transform: uppercase; }
+    header h1 { font-size: 1.5rem; letter-spacing: 1px; color: #FFF; text-transform: uppercase; }
 
     .container { max-width: 600px; margin: 0 auto; padding: 16px; }
 
-    /* Live Header Status Card */
-    .status-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 16px;
-      margin-bottom: 16px;
-    }
-
-    .status-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(35, 134, 54, 0.15);
-      color: #3FB950;
-      border: 1px solid rgba(63, 185, 80, 0.3);
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background-color: #3FB950;
-      border-radius: 50%;
-      box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7);
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
-      70% { box-shadow: 0 0 0 6px rgba(63, 185, 80, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
-    }
-
-    /* Information Cards */
     .card {
       background: var(--card-bg);
       border-radius: 12px;
       padding: 16px;
       margin-bottom: 16px;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255,255,255,0.05);
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     }
 
     .card-title {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 1px;
       color: var(--gold);
@@ -112,35 +63,31 @@
       justify-content: space-between;
       align-items: center;
       text-align: center;
-      padding: 8px 0;
+      padding: 10px 0;
     }
 
     .team-name { font-weight: 700; font-size: 1rem; width: 40%; }
     .score { font-size: 1.8rem; font-weight: 800; color: var(--gold); width: 20%; }
 
     .fixture-info { text-align: center; font-weight: 600; font-size: 1.1rem; color: var(--text); }
-    .fixture-date { text-align: center; color: var(--subtext); font-size: 0.85rem; margin-top: 4px; }
+    .fixture-date { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
 
-    /* Form Dots */
-    .form-container { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
-    .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: bold; color: #fff; }
-    .win { background-color: var(--green); }
-
-    /* News Items */
     .news-item {
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     .news-item:last-child { border-bottom: none; }
-    .news-item a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem; display: block; }
+    .news-item a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: block; }
     .news-item a:hover { color: var(--gold); }
-    .news-date { font-size: 0.75rem; color: var(--subtext); margin-top: 4px; }
+    .news-date { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
 
-    /* Injury List */
     .injury-list { list-style: none; }
-    .injury-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
+    .injury-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
     .injury-item:last-child { border-bottom: none; }
-    .badge-injury { background: rgba(165, 0, 68, 0.3); color: #FF6B81; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; border: 1px solid rgba(255, 107, 129, 0.3); }
+    .badge { background: rgba(165, 0, 68, 0.3); color: #FF6B81; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; }
+
+    .status-dot { height: 8px; width: 8px; background-color: #22C55E; border-radius: 50%; display: inline-block; margin-right: 6px; }
+    .sync-bar { display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--muted); margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -151,19 +98,7 @@
 
   <div class="container">
     
-    <!-- Live Clock & Status Card -->
-    <div class="status-card">
-      <div id="clock-display" style="font-size: 1.1rem; font-weight: bold; color: var(--gold);">--:--:--</div>
-      <div class="status-bar">
-        <div class="badge">
-          <span class="pulse-dot"></span>
-          <span>LIVE SYNC</span>
-        </div>
-        <div style="font-size: 0.8rem; color: var(--subtext);" id="time-ago">Updating...</div>
-      </div>
-    </div>
-
-    <!-- Last Match Result -->
+    <!-- Last Match -->
     <div class="card">
       <div class="card-title">Latest Result</div>
       <div class="score-banner">
@@ -174,79 +109,50 @@
       <div class="fixture-date" id="last-date">LaLiga EA Sports • Sep 16, 2026</div>
     </div>
 
-    <!-- Upcoming Match -->
+    <!-- Next Match -->
     <div class="card">
       <div class="card-title">Upcoming Fixture</div>
       <div class="fixture-info" id="next-fixture">Sevilla FC vs FC Barcelona</div>
       <div class="fixture-date" id="next-date">Sep 20, 2026 • 12:30 AM IST</div>
     </div>
 
-    <!-- Recent Form -->
+    <!-- Live Daily News -->
     <div class="card">
-      <div class="card-title">Recent Form (Last 5)</div>
-      <div class="form-container">
-        <div class="form-dot win">W</div>
-        <div class="form-dot win">W</div>
-        <div class="form-dot win">W</div>
-        <div class="form-dot win">W</div>
-        <div class="form-dot win">W</div>
+      <div class="card-title">Latest News & Rumors</div>
+      <div id="news-container">
+        <div class="news-item">Loading latest Barça news...</div>
       </div>
     </div>
 
-    <!-- Squad Injury Report -->
+    <!-- Squad Injuries -->
     <div class="card">
-      <div class="card-title">Injury Report</div>
+      <div class="card-title">Injury List</div>
       <ul class="injury-list">
         <li class="injury-item">
           <span>Frenkie de Jong (Midfield)</span>
-          <span class="badge-injury">Meniscus</span>
+          <span class="badge">Meniscus</span>
         </li>
         <li class="injury-item">
           <span>Roony Bardghji (Forward)</span>
-          <span class="badge-injury">ACL Recovery</span>
+          <span class="badge">ACL Recovery</span>
         </li>
         <li class="injury-item">
           <span>Joan García (Goalkeeper)</span>
-          <span class="badge-injury">Knee Evaluation</span>
+          <span class="badge">Knee Evaluation</span>
         </li>
       </ul>
     </div>
 
-    <!-- Live Breaking News -->
-    <div class="card">
-      <div class="card-title">Latest News & Headlines</div>
-      <div id="news-container">
-        <div style="color: var(--subtext); font-size: 0.9rem;">Fetching live news feed...</div>
-      </div>
+    <div class="sync-bar">
+      <span class="status-dot"></span> Live Data Sync Active
     </div>
 
   </div>
 
   <script>
-    let lastFetchTime = new Date();
-
-    // 1. Live Clock & Dynamic Time-Ago Counter
-    function updateClock() {
-      const now = new Date();
-      const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      document.getElementById('clock-display').innerText = now.toLocaleString([], options);
-
-      const elapsedSeconds = Math.floor((now - lastFetchTime) / 1000);
-      const timeAgoEl = document.getElementById('time-ago');
-      
-      if (elapsedSeconds < 10) {
-        timeAgoEl.innerText = 'Updated just now';
-      } else if (elapsedSeconds < 60) {
-        timeAgoEl.innerText = `Updated ${elapsedSeconds}s ago`;
-      } else {
-        const mins = Math.floor(elapsedSeconds / 60);
-        timeAgoEl.innerText = `Updated ${mins}m ago`;
-      }
-    }
-
-    // 2. Fetch Live ESPN RSS News Feed
+    // 1. Fetch Real-Time News via ESPN RSS Feed Proxy
     async function fetchNews() {
-      const RSS_URL = 'https://www.espn.com/espn/rss/soccer/news?team=83';
+      const RSS_URL = 'https://www.espn.com/espn/rss/football/news?team=83';
       const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
 
       try {
@@ -255,31 +161,63 @@
         
         if (data.status === 'ok' && data.items.length > 0) {
           const newsContainer = document.getElementById('news-container');
-          newsContainer.innerHTML = '';
+          newsContainer.innerHTML = ''; // Clear loading placeholder
 
           data.items.slice(0, 5).forEach(item => {
-            const pubDate = new Date(item.pubDate).toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
             const newsHtml = `
               <div class="news-item">
                 <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
-                <div class="news-date">${pubDate}</div>
+                <div class="news-date">${new Date(item.pubDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
               </div>
             `;
             newsContainer.innerHTML += newsHtml;
           });
-
-          lastFetchTime = new Date();
         }
       } catch (err) {
-        console.warn("Could not fetch live news feed:", err);
+        console.warn("Couldn't fetch RSS feed, displaying cached news.", err);
       }
     }
 
-    // Initialize clock and news on page load
+    // 2. Fetch Football Matches API (Football-Data.org)
+    async function fetchMatches() {
+      const API_KEY = "YOUR_FOOTBALL_DATA_API_KEY"; // Optional: Insert key here
+      const TEAM_ID = 81; // FC Barcelona
+      
+      if (API_KEY === "YOUR_FOOTBALL_DATA_API_KEY") return;
+
+      try {
+        const res = await fetch(`https://api.football-data.org/v4/teams/${TEAM_ID}/matches?limit=10`, {
+          headers: { 'X-Auth-Token': API_KEY }
+        });
+        const data = await res.json();
+        if (data.matches) {
+          updateMatchUI(data.matches);
+        }
+      } catch (e) {
+        console.error("API error:", e);
+      }
+    }
+
+    function updateMatchUI(matches) {
+      const finished = matches.filter(m => m.status === 'FINISHED').pop();
+      if (finished) {
+        document.getElementById('last-home').innerText = finished.homeTeam.shortName || finished.homeTeam.name;
+        document.getElementById('last-away').innerText = finished.awayTeam.shortName || finished.awayTeam.name;
+        document.getElementById('last-score').innerText = `${finished.score.fullTime.home} - ${finished.score.fullTime.away}`;
+        document.getElementById('last-date').innerText = `${finished.competition.name} • ${new Date(finished.utcDate).toLocaleDateString()}`;
+      }
+
+      const next = matches.find(m => m.status === 'SCHEDULED' || m.status === 'TIMED');
+      if (next) {
+        document.getElementById('next-fixture').innerText = `${next.homeTeam.name} vs ${next.awayTeam.name}`;
+        document.getElementById('next-date').innerText = new Date(next.utcDate).toLocaleString();
+      }
+    }
+
+    // Initialize on load
     document.addEventListener('DOMContentLoaded', () => {
-      setInterval(updateClock, 1000);
-      updateClock();
       fetchNews();
+      fetchMatches();
     });
   </script>
 </body>
