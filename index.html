@@ -4,221 +4,115 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Barça Hub</title>
-  
-  <!-- PWA Settings -->
-  <meta name="theme-color" content="#A50044">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Barça Hub">
-  <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg">
-  
   <style>
     :root {
-      --blau: #A50044;
-      --grana: #004D98;
-      --gold: #EDBB00;
-      --bg: #0F172A;
-      --card-bg: #1E293B;
-      --text: #F8FAFC;
-      --muted: #94A3B8;
+      --bg: #0B0E14;
+      --card: #161B22;
+      --accent: #A50044;
+      --yellow: #EDBB00;
+      --text: #F0F6FC;
+      --subtext: #8B949E;
+      --green: #238636;
     }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background: var(--bg); color: var(--text); padding-bottom: 30px; }
-
-    header {
-      background: linear-gradient(135deg, var(--blau), var(--grana));
-      padding: 20px 16px;
-      text-align: center;
-      border-bottom: 3px solid var(--gold);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 16px;
     }
-
-    header h1 { font-size: 1.5rem; letter-spacing: 1px; color: #FFF; text-transform: uppercase; }
-
-    .container { max-width: 600px; margin: 0 auto; padding: 16px; }
-
-    .card {
-      background: var(--card-bg);
+    .header {
+      background: var(--card);
+      border: 1px solid #30363D;
       border-radius: 12px;
       padding: 16px;
       margin-bottom: 16px;
-      border: 1px solid rgba(255,255,255,0.05);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     }
-
-    .card-title {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--gold);
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-
-    .score-banner {
+    .status-bar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      text-align: center;
-      padding: 10px 0;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #21262D;
     }
-
-    .team-name { font-weight: 700; font-size: 1rem; width: 40%; }
-    .score { font-size: 1.8rem; font-weight: 800; color: var(--gold); width: 20%; }
-
-    .fixture-info { text-align: center; font-weight: 600; font-size: 1.1rem; color: var(--text); }
-    .fixture-date { text-align: center; color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
-
-    .news-item {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(35, 134, 54, 0.15);
+      color: #3FB950;
+      border: 1px solid rgba(63, 185, 80, 0.3);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
-    .news-item:last-child { border-bottom: none; }
-    .news-item a { color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: block; }
-    .news-item a:hover { color: var(--gold); }
-    .news-date { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
-
-    .injury-list { list-style: none; }
-    .injury-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; }
-    .injury-item:last-child { border-bottom: none; }
-    .badge { background: rgba(165, 0, 68, 0.3); color: #FF6B81; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; }
-
-    .status-dot { height: 8px; width: 8px; background-color: #22C55E; border-radius: 50%; display: inline-block; margin-right: 6px; }
-    .sync-bar { display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--muted); margin-top: 10px; }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #3FB950;
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(63, 185, 80, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
+    }
+    .time-text {
+      font-size: 0.8rem;
+      color: var(--subtext);
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>🔵🔴 Barça Hub</h1>
-  </header>
-
-  <div class="container">
+  <div class="header">
+    <h1 style="margin:0; font-size: 1.4rem;">🔵🔴 Barça Hub</h1>
+    <div id="clock-display" style="font-size: 1.1rem; font-weight: bold; color: var(--yellow); margin-top: 6px;"></div>
     
-    <!-- Last Match -->
-    <div class="card">
-      <div class="card-title">Latest Result</div>
-      <div class="score-banner">
-        <div class="team-name" id="last-home">FC Barcelona</div>
-        <div class="score" id="last-score">7 - 2</div>
-        <div class="team-name" id="last-away">Racing Club</div>
+    <div class="status-bar">
+      <div class="badge">
+        <span class="pulse-dot"></span>
+        <span id="sync-status">LIVE SYNC</span>
       </div>
-      <div class="fixture-date" id="last-date">LaLiga EA Sports • Sep 16, 2026</div>
+      <div class="time-text" id="time-ago">Updated just now</div>
     </div>
-
-    <!-- Next Match -->
-    <div class="card">
-      <div class="card-title">Upcoming Fixture</div>
-      <div class="fixture-info" id="next-fixture">Sevilla FC vs FC Barcelona</div>
-      <div class="fixture-date" id="next-date">Sep 20, 2026 • 12:30 AM IST</div>
-    </div>
-
-    <!-- Live Daily News -->
-    <div class="card">
-      <div class="card-title">Latest News & Rumors</div>
-      <div id="news-container">
-        <div class="news-item">Loading latest Barça news...</div>
-      </div>
-    </div>
-
-    <!-- Squad Injuries -->
-    <div class="card">
-      <div class="card-title">Injury List</div>
-      <ul class="injury-list">
-        <li class="injury-item">
-          <span>Frenkie de Jong (Midfield)</span>
-          <span class="badge">Meniscus</span>
-        </li>
-        <li class="injury-item">
-          <span>Roony Bardghji (Forward)</span>
-          <span class="badge">ACL Recovery</span>
-        </li>
-        <li class="injury-item">
-          <span>Joan García (Goalkeeper)</span>
-          <span class="badge">Knee Evaluation</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="sync-bar">
-      <span class="status-dot"></span> Live Data Sync Active
-    </div>
-
   </div>
 
   <script>
-    // 1. Fetch Real-Time News via ESPN RSS Feed Proxy
-    async function fetchNews() {
-      const RSS_URL = 'https://www.espn.com/espn/rss/football/news?team=83';
-      const API_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
+    let lastFetchTime = new Date();
 
-      try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        
-        if (data.status === 'ok' && data.items.length > 0) {
-          const newsContainer = document.getElementById('news-container');
-          newsContainer.innerHTML = ''; // Clear loading placeholder
+    function updateClock() {
+      const now = new Date();
+      const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      document.getElementById('clock-display').innerText = now.toLocaleString([], options);
 
-          data.items.slice(0, 5).forEach(item => {
-            const newsHtml = `
-              <div class="news-item">
-                <a href="${item.link}" target="_blank" rel="noopener">${item.title}</a>
-                <div class="news-date">${new Date(item.pubDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
-              </div>
-            `;
-            newsContainer.innerHTML += newsHtml;
-          });
-        }
-      } catch (err) {
-        console.warn("Couldn't fetch RSS feed, displaying cached news.", err);
-      }
-    }
-
-    // 2. Fetch Football Matches API (Football-Data.org)
-    async function fetchMatches() {
-      const API_KEY = "YOUR_FOOTBALL_DATA_API_KEY"; // Optional: Insert key here
-      const TEAM_ID = 81; // FC Barcelona
+      // Calculate elapsed seconds since last data load
+      const elapsedSeconds = Math.floor((now - lastFetchTime) / 1000);
+      const timeAgoEl = document.getElementById('time-ago');
       
-      if (API_KEY === "YOUR_FOOTBALL_DATA_API_KEY") return;
-
-      try {
-        const res = await fetch(`https://api.football-data.org/v4/teams/${TEAM_ID}/matches?limit=10`, {
-          headers: { 'X-Auth-Token': API_KEY }
-        });
-        const data = await res.json();
-        if (data.matches) {
-          updateMatchUI(data.matches);
-        }
-      } catch (e) {
-        console.error("API error:", e);
+      if (elapsedSeconds < 10) {
+        timeAgoEl.innerText = 'Updated just now';
+      } else if (elapsedSeconds < 60) {
+        timeAgoEl.innerText = `Updated ${elapsedSeconds}s ago`;
+      } else {
+        const mins = Math.floor(elapsedSeconds / 60);
+        timeAgoEl.innerText = `Updated ${mins}m ago`;
       }
     }
 
-    function updateMatchUI(matches) {
-      const finished = matches.filter(m => m.status === 'FINISHED').pop();
-      if (finished) {
-        document.getElementById('last-home').innerText = finished.homeTeam.shortName || finished.homeTeam.name;
-        document.getElementById('last-away').innerText = finished.awayTeam.shortName || finished.awayTeam.name;
-        document.getElementById('last-score').innerText = `${finished.score.fullTime.home} - ${finished.score.fullTime.away}`;
-        document.getElementById('last-date').innerText = `${finished.competition.name} • ${new Date(finished.utcDate).toLocaleDateString()}`;
-      }
-
-      const next = matches.find(m => m.status === 'SCHEDULED' || m.status === 'TIMED');
-      if (next) {
-        document.getElementById('next-fixture').innerText = `${next.homeTeam.name} vs ${next.awayTeam.name}`;
-        document.getElementById('next-date').innerText = new Date(next.utcDate).toLocaleString();
-      }
+    function triggerDataRefresh() {
+      // Call this function whenever your RSS/API fetch completes successfully
+      lastFetchTime = new Date();
+      updateClock();
     }
 
-    // Initialize on load
-    document.addEventListener('DOMContentLoaded', () => {
-      fetchNews();
-      fetchMatches();
-    });
+    // Start ticking clock immediately
+    setInterval(updateClock, 1000);
+    updateClock();
   </script>
 </body>
 </html>
